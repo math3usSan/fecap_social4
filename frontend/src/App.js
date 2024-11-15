@@ -3,7 +3,7 @@ import axios from 'axios';
 import './App.css';
 
 function App() {
-  const [tela, setTela] = useState('login'); // essa parte fica 
+  const [tela, setTela] = useState('login');
   const [usuario, setUsuario] = useState('');
   const [senha, setSenha] = useState('');
   const [mensagem, setMensagem] = useState('');
@@ -27,16 +27,18 @@ function App() {
         senha,
       });
       setMensagem('Login bem-sucedido!');
+      // leva o usuario ate a pagina home do site
+      window.location.href = 'http://127.0.0.1:5500/doar.html#home';
     } catch (error) {
       setMensagem('Usuário ou senha incorretos. Tente novamente.');
     }
   };
 
   const alternarTela = () => {
-    setTela(tela === 'login' ? 'cadastro' : 'login');
-    setUsuario(''); // Limpa o campo de usuário
-    setSenha('');   // Limpa o campo de senha
-    setMensagem(''); // Limpa mensagens anteriores
+    setTela(tela === 'login' ? 'cadastro' : 'login'); // reseta os valores dos inputs, depois do usuario se cadastrar
+    setUsuario(''); 
+    setSenha('');   
+    setMensagem(''); 
   };
 
   return (
@@ -63,7 +65,7 @@ function App() {
       </div>
       <p>{mensagem}</p>
       <button onClick={alternarTela}>
-        {tela === 'login' ? 'Não tem conta? Cadastre-se' : 'Já tem conta? Faça login'}
+        {tela === 'login' ? 'Não tem conta? Cadastre-se' : 'Já tem conta? Faça o login'}
       </button>
     </div>
   );

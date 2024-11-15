@@ -3,7 +3,7 @@ const sqlite3 = require('sqlite3').verbose();
 const cors = require('cors');
 const bodyParser = require('body-parser');
 
-// Criação do banco de dados SQLite
+// criação do banco de dados banco.db
 const db = new sqlite3.Database('./banco.db', (err) => {
   if (err) {
     console.error('Erro ao abrir o banco de dados:', err.message);
@@ -12,7 +12,7 @@ const db = new sqlite3.Database('./banco.db', (err) => {
   }
 });
 
-// Criação das tabelas no banco, caso não existam
+// nesse trecho sera criado a tabela usuarios, caso não exista
 db.run(`CREATE TABLE IF NOT EXISTS usuarios (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   usuario TEXT UNIQUE,
@@ -21,11 +21,10 @@ db.run(`CREATE TABLE IF NOT EXISTS usuarios (
 
 const app = express();
 
-// Configuração do CORS e BodyParser
 app.use(cors());
 app.use(bodyParser.json());
 
-// Rota para cadastro de usuário (sem criptografia)
+// rota para o cadastro do usuario, onde sera adicionado ao banco de dados
 app.post('/cadastro', (req, res) => {
   const { usuario, senha } = req.body;
 
@@ -38,7 +37,7 @@ app.post('/cadastro', (req, res) => {
   });
 });
 
-// Rota para login de usuário
+// validação para o login do usuario
 app.post('/login', (req, res) => {
   const { usuario, senha } = req.body;
 
@@ -51,7 +50,7 @@ app.post('/login', (req, res) => {
   });
 });
 
-// Iniciar o servidor na porta 5000
+// teste para iniciar porta do servidor 5000
 app.listen(5000, () => {
   console.log('Servidor rodando na porta 5000');
 });
